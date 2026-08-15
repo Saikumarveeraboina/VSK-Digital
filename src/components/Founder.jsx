@@ -73,7 +73,7 @@ const Founder = () => {
             
             <div className={styles.signature}>
               <p className={styles.sigName}>— Veeraboina Sai Kumar</p>
-              <p className={styles.sigTitle}>Founder & CEO, VSK Digital</p>
+              <p className={styles.sigTitle}>Founder of VSK Digital</p>
             </div>
           </motion.div>
           
