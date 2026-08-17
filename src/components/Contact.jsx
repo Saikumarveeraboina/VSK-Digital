@@ -15,7 +15,7 @@ const Contact = () => {
     budget: '',
     description: ''
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -26,38 +26,59 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call for the frontend-only version
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({
-        name: '',
-        company: '',
-        email: '',
-        phone: '',
-        whatsapp: '',
-        service: '',
-        budget: '',
-        description: ''
+
+    const formDataToSend = new FormData(e.target);
+
+    formDataToSend.append(
+      'access_key',
+      '8e39dea4-f7fb-4361-82e6-d78347337189'
+    );
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
       });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 5000);
-    }, 1500);
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSuccess(true);
+
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          whatsapp: '',
+          service: '',
+          budget: '',
+          description: ''
+        });
+
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Unable to send your enquiry. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="contact" className={`section-padding bg-light-section ${styles.contactSection}`}>
       <div className={`container ${styles.container}`}>
         <div className={styles.grid}>
-          
-          <motion.div 
+
+          <motion.div
             className={styles.infoColumn}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -68,7 +89,7 @@ const Contact = () => {
             <p className={styles.description}>
               Tell us about your project and let's explore how VSK Digital can help turn your idea into a powerful digital experience.
             </p>
-            
+
             <div className={styles.contactDetails}>
               <a href={`mailto:${contactConfig.email}`} className={styles.contactItem}>
                 <div className={styles.iconWrapper}>
@@ -79,7 +100,7 @@ const Contact = () => {
                   <span className={styles.itemValue}>{contactConfig.email}</span>
                 </div>
               </a>
-              
+
               <a href={`https://wa.me/${contactConfig.whatsappNumber.replace('+', '')}`} target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
                 <div className={styles.iconWrapper}>
                   <Phone size={24} />
@@ -92,7 +113,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={styles.formColumn}
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -118,7 +139,7 @@ const Contact = () => {
                       <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} placeholder="Your Company" />
                     </div>
                   </div>
-                  
+
                   <div className={styles.formRow}>
                     <div className={styles.inputGroup}>
                       <label htmlFor="email">Email *</label>
@@ -164,17 +185,17 @@ const Contact = () => {
 
                   <div className={styles.inputGroup}>
                     <label htmlFor="description">Project Description *</label>
-                    <textarea 
-                      id="description" 
-                      name="description" 
-                      required 
-                      rows="4" 
-                      value={formData.description} 
-                      onChange={handleChange} 
+                    <textarea
+                      id="description"
+                      name="description"
+                      required
+                      rows="4"
+                      value={formData.description}
+                      onChange={handleChange}
                       placeholder="Tell us about your project goals, timeline, and requirements..."
                     ></textarea>
                   </div>
-                  
+
                   <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
                     {isSubmitting ? 'Sending...' : 'Send Project Enquiry'}
                     {!isSubmitting && <Send size={18} />}
@@ -183,7 +204,7 @@ const Contact = () => {
               )}
             </div>
           </motion.div>
-          
+
         </div>
       </div>
     </section>
