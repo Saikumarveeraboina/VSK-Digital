@@ -1,0 +1,415 @@
+.plansSection {
+  position: relative;
+  border-top: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.plansSection::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 70%);
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: var(--text-secondary-dark);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+/* ─── Base Card ─── */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* ─── SILVER ─── */
+.silver {
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.silver::before {
+  background: radial-gradient(circle at top right, rgba(148, 163, 184, 0.1), transparent 70%);
+}
+
+.silver:hover {
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: 0 20px 50px rgba(148, 163, 184, 0.08);
+}
+
+.silverIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(0.3);
+}
+
+.silverBadge {
+  background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.3rem 1rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── GOLD ─── */
+.gold {
+  border-color: rgba(234, 179, 8, 0.25);
+  background: linear-gradient(
+    180deg,
+    rgba(234, 179, 8, 0.04) 0%,
+    var(--glass-bg) 40%
+  );
+}
+
+.gold::before {
+  background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.12), transparent 70%);
+}
+
+.gold:hover {
+  border-color: rgba(234, 179, 8, 0.5);
+  box-shadow: 0 20px 50px rgba(234, 179, 8, 0.1);
+}
+
+.goldIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.goldBadge {
+  background: linear-gradient(135deg, #eab308, #f59e0b);
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.3rem 1rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── DIAMOND ─── */
+.diamond {
+  border-color: rgba(99, 102, 241, 0.3);
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(139, 92, 246, 0.04) 30%,
+    var(--glass-bg) 60%
+  );
+  position: relative;
+}
+
+.diamond::before {
+  background: radial-gradient(circle at top center, rgba(139, 92, 246, 0.15), transparent 60%);
+  opacity: 1;
+}
+
+.diamond::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.5),
+    rgba(99, 102, 241, 0.2),
+    transparent
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.diamond:hover {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow:
+    0 20px 50px rgba(139, 92, 246, 0.15),
+    0 0 80px rgba(139, 92, 246, 0.05);
+  transform: translateY(-10px);
+}
+
+.diamondIcon {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  animation: diamondPulse 3s ease-in-out infinite;
+}
+
+@keyframes diamondPulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.08); filter: brightness(1.2); }
+}
+
+.diamondBadge {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.35rem 1.1rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+/* ─── Recommended Banner ─── */
+.recommended {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  z-index: 2;
+}
+
+/* ─── Shared Card Content ─── */
+.planName {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.planDescription {
+  color: var(--text-secondary-dark);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.divider {
+  height: 1px;
+  background: var(--glass-border);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.goldDivider {
+  background: linear-gradient(to right, transparent, rgba(234, 179, 8, 0.3), transparent);
+}
+
+.diamondDivider {
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.4), transparent);
+}
+
+.featuresTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary-dark);
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.featuresList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary-dark);
+  transition: color 0.3s ease;
+}
+
+.card:hover .featureItem {
+  color: var(--text-primary-dark);
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.silverCheck {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+}
+
+.goldCheck {
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+}
+
+.diamondCheck {
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+/* ─── CTA Button ─── */
+.ctaButton {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.silverCta {
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+}
+
+.silverCta:hover {
+  background: rgba(148, 163, 184, 0.2);
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: 0 8px 25px rgba(148, 163, 184, 0.1);
+}
+
+.goldCta {
+  background: rgba(234, 179, 8, 0.12);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #fbbf24;
+}
+
+.goldCta:hover {
+  background: rgba(234, 179, 8, 0.2);
+  border-color: rgba(234, 179, 8, 0.5);
+  box-shadow: 0 8px 25px rgba(234, 179, 8, 0.15);
+}
+
+.diamondCta {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+.diamondCta:hover {
+  background: linear-gradient(135deg, #7c7ff7, #9d75fa);
+  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.45);
+  transform: translateY(-2px);
+}
+
+/* ─── Responsive ─── */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .diamond {
+    transform: scale(1.03);
+  }
+
+  .diamond:hover {
+    transform: scale(1.03) translateY(-10px);
+  }
+}

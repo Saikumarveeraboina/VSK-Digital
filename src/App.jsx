@@ -7,6 +7,7 @@ import './index.css';
 // Lazy load below-the-fold components for better performance
 const TrustSection = lazy(() => import('./components/TrustSection'));
 const Services = lazy(() => import('./components/Services'));
+const Plans = lazy(() => import('./components/Plans'));
 const Technologies = lazy(() => import('./components/Technologies'));
 const Founder = lazy(() => import('./components/Founder'));
 const Portfolio = lazy(() => import('./components/Portfolio'));
@@ -26,6 +27,7 @@ function App() {
         <Suspense fallback={<div className="section-padding bg-dark-section" style={{ minHeight: '50vh' }}></div>}>
           <TrustSection />
           <Services />
+          <Plans />
           <Technologies />
           <Founder />
           <Portfolio />
